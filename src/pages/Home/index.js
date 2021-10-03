@@ -3,10 +3,41 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { TabBar } from 'antd-mobile';
 import News from "../News"
+<<<<<<< HEAD
+=======
+import Index from "../Index";
+import HouseList from "../HouseList";
+import Profile from "../Profile";
+import "./index.css"
+
+const tatItems = [
+  {
+    title:"首页",
+    icon:"icon-ind",
+    path:"/home/index"
+  },
+  {
+    title:"找房",
+    icon:"icon-findHouse",
+    path:"/home/houseList"
+  },
+  {
+    title:"资讯",
+    icon:"icon-ind",
+    path:"/home/news"
+  },
+  {
+    title:"我的",
+    icon:"icon-my",
+    path:"/home/profile"
+  },
+]
+>>>>>>> f09a7c7... 完成了tabBar组件,创建了tabar页面及路由
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       selectedTab: 'blueTab',
       hidden: false,
       fullScreen: false,
@@ -40,11 +71,38 @@ class Home extends React.Component {
     );
   }
 
+=======
+      selectedTab: this.props.location.pathname
+    };
+  }
+  renderTabBarItem = ()=>{
+    return tatItems.map((item,index)=>{
+      return (
+        <TabBar.Item
+          title={item.title}
+          key={item.title}
+          icon={<i className={`iconfont ${item.icon}`}></i>}
+          selectedIcon={<i className={`iconfont ${item.icon}`}></i>}
+          selected={this.state.selectedTab === item.path}
+          onPress={() => {
+            this.setState({
+              selectedTab: item.path,
+            });
+            this.props.history.push(item.path)
+          }}
+          data-seed="logId"
+        >
+        </TabBar.Item>
+      )
+    })
+  }
+>>>>>>> f09a7c7... 完成了tabBar组件,创建了tabar页面及路由
   render() {
     return (
-      <div>
+      <div className="home">
         {/* 渲染子路由 */}
         <Route path="/home/news" component={News}></Route>
+<<<<<<< HEAD
         <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
           <TabBar
             unselectedTintColor="#949494"
@@ -155,6 +213,17 @@ class Home extends React.Component {
             </TabBar.Item>
           </TabBar>
         </div>
+=======
+        <Route path="/home/index" component={Index}></Route>
+        <Route path="/home/houseList" component={HouseList}></Route>
+        <Route path="/home/profile" component={Profile}></Route>
+        <TabBar
+          tintColor="#21b97a"
+          barTintColor="white"
+        >
+          {this.renderTabBarItem()}
+        </TabBar>
+>>>>>>> f09a7c7... 完成了tabBar组件,创建了tabar页面及路由
 
       </div>
     )
