@@ -1,3 +1,5 @@
+
+/*eslint-disable */
 import React from "react";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route } from "react-router-dom"
