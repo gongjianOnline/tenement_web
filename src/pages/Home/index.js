@@ -2,7 +2,7 @@
 /*eslint-disable */
 import React from "react";
 // eslint-disable-next-line
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import { TabBar } from 'antd-mobile';
 import News from "../News"
 import Index from "../Index";
@@ -40,7 +40,7 @@ class Home extends React.Component {
     };
   }
   renderTabBarItem = ()=>{
-    return tatItems.map((item,index)=>{
+    return tatItems.map((item)=>{
       return (
         <TabBar.Item
           title={item.title}
