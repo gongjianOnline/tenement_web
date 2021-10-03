@@ -7,9 +7,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Link to="/home">首页</Link>
-        <Link to="/cityList">城市选择</Link>
-
         <Route path="/home" component={Home}></Route>
         <Route path="/cityList" component={CityList}></Route>
       </div>

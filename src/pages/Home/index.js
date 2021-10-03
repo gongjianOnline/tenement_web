@@ -1,43 +1,21 @@
+
+/*eslint-disable */
 import React from "react";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { TabBar } from 'antd-mobile';
 import News from "../News"
+import Index from "../Index";
+import HouseList from "../HouseList";
+import Profile from "../Profile";
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedTab: 'blueTab',
       hidden: false,
-      fullScreen: false,
+      fullScreen: true,
     };
-  }
-  renderContent(pageText) {
-    return (
-      <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
-        <div style={{ paddingTop: 60 }}>Clicked “{pageText}” tab， show “{pageText}” information</div>
-        <a style={{ display: 'block', marginTop: 40, marginBottom: 20, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          Click to show/hide tab-bar
-        </a>
-        <a style={{ display: 'block', marginBottom: 600, color: '#108ee9' }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              fullScreen: !this.state.fullScreen,
-            });
-          }}
-        >
-          Click to switch fullscreen
-        </a>
-      </div>
-    );
   }
 
   render() {
@@ -45,15 +23,19 @@ class Home extends React.Component {
       <div>
         {/* 渲染子路由 */}
         <Route path="/home/news" component={News}></Route>
+        <Route path="/home/index" component={Index}></Route>
+        <Route path="/home/houseList" component={HouseList}></Route>
+        <Route path="/home/Profile" component={Profile}></Route>
         <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', top: 0 } : { height: 400 }}>
           <TabBar
             unselectedTintColor="#949494"
             tintColor="#33A3F4"
             barTintColor="white"
+            noRenderContent={true}
             hidden={this.state.hidden}
           >
             <TabBar.Item
-              title="Life"
+              title="首页"
               key="Life"
               icon={<div style={{
                 width: '22px',
@@ -70,15 +52,14 @@ class Home extends React.Component {
               />
               }
               selected={this.state.selectedTab === 'blueTab'}
-              badge={1}
               onPress={() => {
                 this.setState({
                   selectedTab: 'blueTab',
                 });
+                this.props.history.push('/home/index')
               }}
               data-seed="logId"
             >
-              {this.renderContent('Life')}
             </TabBar.Item>
             <TabBar.Item
               icon={
@@ -97,18 +78,17 @@ class Home extends React.Component {
                 }}
                 />
               }
-              title="Koubei"
+              title="找房"
               key="Koubei"
-              badge={'new'}
               selected={this.state.selectedTab === 'redTab'}
               onPress={() => {
                 this.setState({
                   selectedTab: 'redTab',
                 });
+                this.props.history.push('/home/news')
               }}
               data-seed="logId1"
             >
-              {this.renderContent('Koubei')}
             </TabBar.Item>
             <TabBar.Item
               icon={
@@ -127,31 +107,30 @@ class Home extends React.Component {
                 }}
                 />
               }
-              title="Friend"
+              title="资讯"
               key="Friend"
-              dot
               selected={this.state.selectedTab === 'greenTab'}
               onPress={() => {
                 this.setState({
                   selectedTab: 'greenTab',
                 });
+                this.props.history.push('/home/news')
               }}
             >
-              {this.renderContent('Friend')}
             </TabBar.Item>
             <TabBar.Item
               icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
               selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
-              title="My"
+              title="我的"
               key="my"
               selected={this.state.selectedTab === 'yellowTab'}
               onPress={() => {
                 this.setState({
                   selectedTab: 'yellowTab',
                 });
+                this.props.history.push('/home/profile')
               }}
             >
-              {this.renderContent('My')}
             </TabBar.Item>
           </TabBar>
         </div>
