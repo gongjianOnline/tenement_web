@@ -6,4 +6,5 @@ html,body{
 }
 *{
   box-sizing: border-box;
+  touch-action: pan-y;
 }

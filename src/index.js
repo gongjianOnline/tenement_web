@@ -6,6 +6,7 @@ import 'antd-mobile/dist/antd-mobile.css'
 import './index.css';
 import "./assets/fonts/iconfont.css"
 
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

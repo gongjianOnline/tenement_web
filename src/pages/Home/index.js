@@ -14,7 +14,7 @@ const tatItems = [
   {
     title:"首页",
     icon:"icon-ind",
-    path:"/home/index"
+    path:"/home"
   },
   {
     title:"找房",
@@ -65,7 +65,7 @@ class Home extends React.Component {
       <div className="home">
         {/* 渲染子路由 */}
         <Route path="/home/news" component={News}></Route>
-        <Route path="/home/index" component={Index}></Route>
+        <Route exact path="/home" component={Index}></Route>
         <Route path="/home/houseList" component={HouseList}></Route>
         <Route path="/home/profile" component={Profile}></Route>
         <TabBar
