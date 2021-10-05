@@ -1,3 +1,17 @@
 .index .slider-list{
     height: 212px !important;
 }
+.nav{
+    padding: 10px 0px;
+}
+.nav img{
+    width: 48px;
+}
+.nav h2{
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0;
+}
+.nav .am-flexbox-item{
+    text-align: center;
+}
