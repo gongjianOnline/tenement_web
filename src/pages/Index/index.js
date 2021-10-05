@@ -8,6 +8,34 @@ import Nav2 from "../../assets/images/nav-2.png"
 import Nav3 from "../../assets/images/nav-3.png"
 import Nav4 from "../../assets/images/nav-4.png"
 
+// 导航菜单数据
+const navs = [
+  {
+    id:"1",
+    img:Nav1,
+    title:"整租",
+    path:"/home/houseList"
+  },
+  {
+    id:"2",
+    img:Nav2,
+    title:"合租",
+    path:"/home/houseList"
+  },
+  {
+    id:"3",
+    img:Nav3,
+    title:"地图找房",
+    path:"/map"
+  },
+  {
+    id:"4",
+    img:Nav4,
+    title:"去出租",
+    path:""
+  },
+
+]
 export default class Index extends React.Component {
   constructor(props) {
     super(props)
@@ -47,12 +75,24 @@ export default class Index extends React.Component {
       </Carousel>
     )
   }
+  // 渲染导航菜单
+  renderNavs = ()=>{
+    return navs.map((item)=>{
+      return(
+        <Flex.Item onClick={()=>this.props.history.push(item.path)}>
+          <img src={item.img} alt="" />
+          <h2>{item.title}</h2>
+        </Flex.Item>
+      )
+    })
+  }
   componentDidMount() {
     this.getSwipers()
   }
   render() {
     return (
       <div>
+        {/* 轮播 */}
         <div className="index">
           {
             this.state.swipers.length &&
@@ -61,23 +101,9 @@ export default class Index extends React.Component {
         </div>
         {/* 导航菜单 */}
         <Flex className="nav">
-          <Flex.Item>
-            <img src={Nav1} alt="" />
-            <h2>整租</h2>
-          </Flex.Item>
-          <Flex.Item>
-            <img src={Nav2} alt="" />
-            <h2>合租</h2>
-          </Flex.Item>
-          <Flex.Item>
-            <img src={Nav3} alt="" />
-            <h2>地图找房</h2>
-          </Flex.Item>
-          <Flex.Item>
-            <img src={Nav4} alt="" />
-            <h2>去出租</h2>
-          </Flex.Item>
+          {this.renderNavs()}
         </Flex>
+      
       </div>
     )
   }
