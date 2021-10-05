@@ -15,3 +15,52 @@
 .nav .am-flexbox-item{
     text-align: center;
 }
+.group .title{
+    padding: 10px 10px;
+    margin: 0;
+}
+.group-item{
+    .desc{
+        .title{
+            font-size: 14px;
+            text-align: center;
+        }
+        .info{
+            color: rgb(150, 150, 150);
+            display: block;
+            text-align: center;
+        }
+    }
+    img{
+        width:48px
+    }
+}
+.group .am-grid-item-content{
+    padding: 6px 0px !important;
+}
+.news{
+    .title{
+        padding:10px 10px;
+        margin: 0px;
+    }
+}
+.newList{
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.548);
+    img{
+        width:100px
+    }
+    h3{
+        margin: 0;
+        font-size: 14px;
+    }
+    .newInfoContainer{
+        padding-left: 10px;
+    }
+    .newInfo{
+        height: 75px;
+    }
+    .newOrigin{
+        width: 100%;
+    }
+}
