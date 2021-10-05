@@ -2,7 +2,7 @@
 import React from "react";
 import { Carousel , Flex} from 'antd-mobile';
 import axios from "axios"
-import "./Index.css"
+import "./Index.scss"
 import Nav1 from "../../assets/images/nav-1.png"
 import Nav2 from "../../assets/images/nav-2.png"
 import Nav3 from "../../assets/images/nav-3.png"
