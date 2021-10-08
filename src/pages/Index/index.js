@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React from "react";
-import { Carousel , Flex, Grid, WingBlank} from 'antd-mobile';
+import { Carousel , Flex, Grid, WingBlank, Icon} from 'antd-mobile';
 import axios from "axios"
 import "./Index.scss"
 import Nav1 from "../../assets/images/nav-1.png"
@@ -143,7 +143,7 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="indexWrapper">
         {/* 轮播 */}
         <div className="index">
           {
@@ -183,6 +183,27 @@ export default class Index extends React.Component {
           <div className="">
             <WingBlank>{this.renderNews()}</WingBlank>
           </div>
+        </div>
+        {/* 搜索框 */}
+        <div className="SearchBox">
+            <Flex justify="around">
+              <div className="inpurtWrapper">
+                <Flex>
+                  <div className="inpurtWrapperItem placeTitle">
+                    上海
+                    <Icon type="down" size="xs" className="placeIcon"/>
+                  </div>
+                  <div className="inpurtWrapperItem SearchInput">
+                    <input type="text" placeholder="请输入小区或地址"/>
+                  </div>
+                </Flex>
+              </div>
+              <div className="iconWrapper">
+                <svg className="icon iconItem" aria-hidden="true">
+                  <use xlinkHref="#icon-wode"></use>
+                </svg>
+              </div>
+            </Flex>
         </div>
       </div>
     )

@@ -1,6 +1,10 @@
+.indexWrapper{
+    position: relative;
+}
 .index .slider-list{
     height: 212px !important;
 }
+// 租房小组
 .nav{
     padding: 10px 0px;
 }
@@ -15,6 +19,7 @@
 .nav .am-flexbox-item{
     text-align: center;
 }
+// 最新资讯
 .group .title{
     padding: 10px 10px;
     margin: 0;
@@ -62,5 +67,55 @@
     }
     .newOrigin{
         width: 100%;
+    }
+}
+// 顶部搜索栏
+.icon {
+    width: 2em;
+    height: 2em;
+    fill: currentColor;
+    display: block;
+}
+.iconItem{
+    text-align: center;
+    font-size:1.2em;
+    color: rgba(255, 255, 255, 0.808);
+}
+.SearchBox{
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 100%;
+    padding: 10px;
+    .inpurtWrapper{
+        width: 70%;
+        background: rgba(255, 255, 255, 0.808);
+        height: 30px;
+    }
+    .iconWrapper{
+        width:30px;
+        height: 30px;
+    }
+    .inpurtWrapperItem{
+        line-height: 30px;
+    }
+    .placeTitle{
+        padding: 0px 10px;
+        margin-right: 10px;
+        position: relative;
+        .placeIcon{
+            position: absolute;
+            right: -10;
+            top:50%;
+            transform: translateY(-50%);
+        }
+    }
+    .SearchInput{
+        width: 75%;
+        input{
+            width: 100%;
+            border: none;
+            background: rgba(255, 255, 255,0);
+        }
     }
 }
