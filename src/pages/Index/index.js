@@ -44,6 +44,7 @@ export default class Index extends React.Component {
       swipers: [],// 轮播图状态数据
       groups:[],// 租房小组的数据
       mewsData:[],// 资讯数据
+      localeName:"",// 地理位置
     }
   }
   
@@ -139,16 +140,34 @@ export default class Index extends React.Component {
   handelMap = ()=>{
     this.props.history.push("./map")
   }
+  //获取地理位置
+  getLocale = ()=>{
+    var myCity = new BMapGL.LocalCity();
+    myCity.get((result)=>{
+      console.log(result)
+      let name = result.name
+      axios({
+        methods:"get",
+        url:"http://localhost:7501/area/info",
+        params:{
+          name:name
+        }
+      }).then((response)=>{
+        this.setState(()=>{
+          return {
+            localeName:response.data.body.label
+          }
+        })
+      })
+    });
+  }
 
   componentDidMount() {
     this.getSwipers();
     this.getGroups();
     this.getNews();
-    // 获取位置信息
-    var myCity = new BMapGL.LocalCity();
-    myCity.get((result)=>{
-      console.log(result)
-    }); 
+    this.getLocale()// 获取位置信息
+    
   }
 
   render() {
@@ -200,7 +219,7 @@ export default class Index extends React.Component {
               <div className="inpurtWrapper">
                 <Flex>
                   <div className="inpurtWrapperItem placeTitle">
-                    上海
+                    {this.state.localeName}
                     <Icon type="down" size="xs" className="placeIcon"/>
                   </div>
                   <div className="inpurtWrapperItem SearchInput">
