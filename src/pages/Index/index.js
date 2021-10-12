@@ -101,9 +101,9 @@ export default class Index extends React.Component {
 
   // 渲染导航菜单
   renderNavs = ()=>{
-    return navs.map((item)=>{
+    return navs.map((item,index)=>{
       return(
-        <Flex.Item onClick={()=>this.props.history.push(item.path)}>
+        <Flex.Item onClick={()=>this.props.history.push(item.path)} key={index}>
           <img src={item.img} alt="" />
           <h2>{item.title}</h2>
         </Flex.Item>
@@ -143,7 +143,12 @@ export default class Index extends React.Component {
   componentDidMount() {
     this.getSwipers();
     this.getGroups();
-    this.getNews()
+    this.getNews();
+    // 获取位置信息
+    var myCity = new BMapGL.LocalCity();
+    myCity.get((result)=>{
+      console.log(result)
+    }); 
   }
 
   render() {
