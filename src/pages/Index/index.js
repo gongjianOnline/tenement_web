@@ -135,6 +135,11 @@ export default class Index extends React.Component {
     })
   }
 
+  //跳转到地图页面
+  handelMap = ()=>{
+    this.props.history.push("./map")
+  }
+
   componentDidMount() {
     this.getSwipers();
     this.getGroups();
@@ -198,9 +203,9 @@ export default class Index extends React.Component {
                   </div>
                 </Flex>
               </div>
-              <div className="iconWrapper">
+              <div className="iconWrapper" onClick={this.handelMap}>
                 <svg className="icon iconItem" aria-hidden="true">
-                  <use xlinkHref="#icon-wode"></use>
+                  <use xlinkHref="#icon-ditu"></use>
                 </svg>
               </div>
             </Flex>
