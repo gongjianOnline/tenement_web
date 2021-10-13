@@ -161,6 +161,10 @@ export default class Index extends React.Component {
       })
     });
   }
+  //跳转到城市列表
+  handelClick = ()=>{
+    this.props.history.push('/cityList')
+  }
 
   componentDidMount() {
     this.getSwipers();
@@ -218,7 +222,7 @@ export default class Index extends React.Component {
             <Flex justify="around">
               <div className="inpurtWrapper">
                 <Flex>
-                  <div className="inpurtWrapperItem placeTitle">
+                  <div className="inpurtWrapperItem placeTitle" onClick={this.handelClick}>
                     {this.state.localeName}
                     <Icon type="down" size="xs" className="placeIcon"/>
                   </div>
