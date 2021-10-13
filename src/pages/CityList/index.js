@@ -1,7 +1,24 @@
 import React from "react";
-import { NavBar, Icon } from 'antd-mobile';
+import { NavBar } from 'antd-mobile';
+import axios from "axios"
 import "./index.scss"
 class CityList extends React.Component {
+  constructor(props){
+    super(props)
+  }
+  // 获取城市列表数据
+  getCityList = ()=>{
+    axios({
+      methods:"get",
+      url:"http://localhost:7501/area/city?level=1"
+    }).then((response)=>{
+      console.log("获取城市列表的数据",response)
+    })
+  }
+
+  componentDidMount(){
+    this.getCityList()
+  }
   render() {
     return (
       <div>
