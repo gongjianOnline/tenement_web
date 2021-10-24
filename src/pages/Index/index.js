@@ -2,6 +2,7 @@
 import React from "react";
 import { Carousel , Flex, Grid, WingBlank, Icon} from 'antd-mobile';
 import axios from "axios"
+import {getCurrentCity} from "../../utils/index"
 import "./Index.scss"
 import Nav1 from "../../assets/images/nav-1.png"
 import Nav2 from "../../assets/images/nav-2.png"
@@ -141,25 +142,13 @@ export default class Index extends React.Component {
     this.props.history.push("./map")
   }
   //获取地理位置
-  getLocale = ()=>{
-    var myCity = new BMapGL.LocalCity();
-    myCity.get((result)=>{
-      console.log(result)
-      let name = result.name
-      axios({
-        methods:"get",
-        url:"http://localhost:7501/area/info",
-        params:{
-          name:name
-        }
-      }).then((response)=>{
-        this.setState(()=>{
-          return {
-            localeName:response.data.body.label
-          }
-        })
-      })
-    });
+  async getLocale(){
+    const response = await getCurrentCity()
+    this.setState(()=>{
+      return {
+        localeName:response.label
+      }
+    })
   }
   //跳转到城市列表
   handelClick = ()=>{

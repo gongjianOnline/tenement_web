@@ -1,4 +1,20 @@
+.cityList{
+    height: 100%;
+}
 .NavBar{
     background-color: #f6f5f6;
     color:#333;
+}
+.city{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.title{
+    height: 36px;
+    color: #ccc;
+}
+.name{
+    height: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
 }
