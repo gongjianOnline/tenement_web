@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React from "react";
-import { NavBar } from 'antd-mobile';
+import { NavBar , Toast } from 'antd-mobile';
 import axios from "axios"
 import "./index.scss"
 import {getCurrentCity} from "../../utils/index"
@@ -48,6 +48,8 @@ const title_height = 36;
 const name_height = 50
 // 用于节流的闭包参数
 let valid = true
+// 有数据的城市
+const dataCity = ["北京","上海","广州","深圳"]
 class CityList extends React.Component {
   constructor(props){
     super(props)
@@ -87,6 +89,15 @@ class CityList extends React.Component {
     await this.getCityList();
     this.citylestComponent.current.measureAllRows()
   }
+  changeCity(item){
+    if(dataCity.includes(item.label)){
+      localStorage.setItem("hkzf_city",JSON.stringify(item))
+      this.props.history.go(-1)
+    }else{
+      Toast.info("该地区咱没有数据",2,null,false);
+    }
+    
+  }
   rowRenderer=({
     key, 
     index,
@@ -102,7 +113,7 @@ class CityList extends React.Component {
         {
           CityList[letter].map((item,index)=>{
             return (
-              <div className="name" key={item.value}>{item.label}</div>
+              <div className="name" key={item.value} onClick={()=>{this.changeCity(item)}}>{item.label}</div>
             )
           })
         }
@@ -118,9 +129,6 @@ class CityList extends React.Component {
     const {CityListFirst,activeIndex} = this.state;
     return CityListFirst.map((item,index)=>(
         <li className="city-index-item" key={index} onClick={()=>{
-          // this.setState({
-          //   activeIndex:index
-          // })
           this.citylestComponent.current.scrollToRow(index)
         }}> 
           <span className={activeIndex==index?"index-active":""}>{item==='hot'?'热':item.toUpperCase()}</span>
