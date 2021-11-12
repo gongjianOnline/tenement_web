@@ -7,9 +7,22 @@ class Map extends React.Component {
     super(props)
   }
   componentDidMount(){
-    var map = new BMapGL.Map("container");
-    var point = new BMapGL.Point(116.404, 39.915);
-    map.centerAndZoom(point, 15); 
+    // 获取当前定位城市
+    this.initMap()
+  }
+
+  initMap(){
+    const {label,value}  = JSON.parse(localStorage.getItem("hkzf_city"));
+    const map = new BMapGL.Map("container");
+    const myGeo = new BMapGL.Geocoder();
+    myGeo.getPoint(label,(point)=>{
+      if(point){
+        map.centerAndZoom(point,11);
+        map.addControl(new BMapGL.ScaleControl());
+        map.addControl(new BMapGL.ZoomControl());
+        map.addControl(new BMapGL.CityListControl());
+      }
+    },label)
   }
 
   render() {
