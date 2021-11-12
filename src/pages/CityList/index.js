@@ -5,6 +5,7 @@ import axios from "axios"
 import "./index.scss"
 import {getCurrentCity} from "../../utils/index"
 import { List, AutoSizer } from "react-virtualized"
+import NavHeader from "../NavHeader/index"
 // 城市列表格式化
 const formatCityList = (data)=>{
   let CityList = {};
@@ -160,11 +161,7 @@ class CityList extends React.Component {
   render() {
     return (
       <div className="cityList">
-        <NavBar
-          className="NavBar"
-          mode="light"
-          icon={<i className="iconfont icon-back"></i>}
-          onLeftClick={() => this.props.history.go(-1)}>城市选择</NavBar>
+        <NavHeader>城市选择</NavHeader>
         <AutoSizer className="xxx">
           {
             ({width,height}) => (

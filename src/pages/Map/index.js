@@ -1,6 +1,7 @@
 /*eslint-disable */
 import React from "react";
 import "./index.scss"
+import NavHeader from "../NavHeader/index"
 class Map extends React.Component {
   constructor(props) {
     super(props)
@@ -14,6 +15,7 @@ class Map extends React.Component {
   render() {
     return (
       <div className="map">
+        <NavHeader>地图找房</NavHeader>
         <div id="container"></div>
       </div>
     )
