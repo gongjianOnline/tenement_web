@@ -87,11 +87,8 @@ class Map extends React.Component {
     let res = response.data.body;
     const {nextZoom,type} = this.getTypeAndZoom()
     res.forEach((item)=>{
-      this.createOverlays(item)
+      this.createOverlays(item,nextZoom,type)
     })
-  }
-  createOverlays(){
-
   }
   // 获取当前地图的缩放级别
   getTypeAndZoom(){
@@ -112,6 +109,34 @@ class Map extends React.Component {
     }
     return {nextZoom,type}
   }
+  // 创建覆盖物
+  createOverlays(data,zoom,type){
+    const {
+      coord:{longitude,latitude},
+      label:areaName,
+      count,
+      value
+    } = data
+    // 创建坐标对象
+    let areaPoint = new BMapGL.Point(longitude,latitude)
+
+    if(type === "circle"){
+      // 创建小区和镇的覆盖物
+      this.createCircle(areaPoint,areaName,count,value,zoom)
+    }else{
+      // 创建小区覆盖物
+      this.createRect(areaPoint,areaName,count,value)
+    }
+  }
+  // 创建区\镇覆盖物
+  createCircle(){
+
+  }
+  // 创建小区覆盖物
+  createRect(){
+
+  }
+
 
   render() {
     return (
