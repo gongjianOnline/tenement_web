@@ -86,7 +86,6 @@ class Map extends React.Component {
         id: id,
       },
     });
-    console.log("房屋列表", response);
     let res = response.data.body;
     const { nextZoom, type } = this.getTypeAndZoom();
     res.forEach((item) => {
@@ -162,15 +161,87 @@ class Map extends React.Component {
     });
     this.map.addOverlay(label);
   }
-
   // 创建小区覆盖物
-  createRect() {}
+  createRect(point, name, count, id){
+    const label = new BMapGL.Label("", {
+      position: point,
+      offset: new BMapGL.Size(-50, -28),
+    });
+    label.setContent(`
+      <div class="${styles.rect}">
+        <span class="${styles.housename}">${name}</span>
+        <span class="${styles.housenum}">${count}</span>
+        <i class="${styles.arrow}"></i>
+      </div>
+    `);
+    label.setStyle({
+      cursor: "pointer",
+      border: "0px solid rgb(255,0,0)",
+      padding: "0px",
+      whitsSpace: "nowrap",
+      color: "rgb(255,255,255)",
+      fontSize: "11px",
+      textAlign: "center",
+    });
+    // 给 label 对象添加一个唯一标识
+    label.id = id;
+    // 添加点击事件
+    label.addEventListener("click", (e) => {
+      this.getHousesList(id)
+    });
+    this.map.addOverlay(label);
+  }
+
+  // 添加覆盖物到地图中
+  async getHousesList(id){
+    let response = await axios({
+      methods:'get',
+      url:"http://localhost:7501/houses",
+      params:{
+        cityId:id
+      }
+    })
+    console.log("覆盖物单击打印",response);
+  }
 
   render() {
     return (
       <div className="map">
         <NavHeader>地图找房</NavHeader>
         <div id="container"></div>
+        <div className="xxx">123456</div>
+        {/* 房源列表 */}
+        {/* className={[styles.houseList,styles.show].join('')} */}
+        {/* <div className={styles.houseList}> 
+          <div className={styles.titleWrap}>
+            <h1 className={styles.listTitle}>房屋列表</h1>
+            <Link className={styles.titleMore} to="/home/list">
+              更多房源
+            </Link>
+          </div>
+          
+          <div className={styles.house}>
+            <div className={styles.imgWrap}>
+              <img className={styles.img} 
+                src="" 
+                alt=""/>
+            </div>
+            <div className={styles.content}> 
+              <h3 className={styles.title}>
+                三期xxxxxx
+              </h3>
+              <div className={styles.desc}>xx/xx/xx</div>
+              <div> 
+                <span className={[styles.tag,styles.tag1].join(' ')}>
+                  近地铁
+                </span>
+              </div>
+              <div className={styles.price}>
+                <span className={styles.priceNum}>8500</span>元/月
+              </div>
+            </div>
+          </div>
+        </div> */}
       </div>
     );
   }
