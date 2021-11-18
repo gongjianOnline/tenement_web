@@ -8,6 +8,10 @@ import axios from "axios";
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      houseList:[],
+      isShowList:false, // 是否展示房源列表
+    }
   }
   componentDidMount() {
     // 获取当前定位城市
@@ -28,50 +32,7 @@ class Map extends React.Component {
           map.addControl(new BMapGL.ScaleControl());
           map.addControl(new BMapGL.ZoomControl());
           map.addControl(new BMapGL.CityListControl());
-
           this.renderOverlays(value);
-
-          // 获取房屋信息列表
-          // let response = await axios({
-          //   methods:"get",
-          //   url:"http://localhost:7501/area/map",
-          //   params:{
-          //     id:value
-          //   }
-          // })
-          // console.log("房屋列表",response)
-          // response.data.body.forEach((item,index)=>{
-          //   let arePoint = new BMapGL.Point(item.coord.longitude,item.coord.latitude)
-          //   /*设置setContent,第一个参数会失效,因此传空占位参数*/
-          //   const label = new BMapGL.Label("",{
-          //     position: arePoint,
-          //     offset:new BMapGL.Size(-35,-35)
-          //   });
-          //   label.setContent(`
-          //     <div class="${styles.bubble}">
-          //       <p class="${styles.name}">${item.label || "暂无"}</p>
-          //       <p>${item.count || "0"}套</p>
-          //     </div>
-          //   `)
-          //   label.setStyle({
-          //     cursor:"pointer",
-          //     border:"0px solid rgb(255,0,0)",
-          //     padding:"0px",
-          //     whitsSpace:"nowrap",
-          //     color:"rgb(255,255,255)",
-          //     fontSize:"11px",
-          //     textAlign:"center"
-          //   })
-          //   label.id = item.value
-          //   // 添加点击事件
-          //   label.addEventListener("click",(e)=>{
-          //     console.log("打印点击事件",e,label.id)
-          //     // 放大地图,当前点击的覆盖物为中心
-          //     map.centerAndZoom(arePoint,13)
-          //     map.clearOverlays()
-          //   })
-          //   map.addOverlay(label)
-          // })
         }
       },
       label
@@ -202,6 +163,48 @@ class Map extends React.Component {
       }
     })
     console.log("覆盖物单击打印",response);
+    this.setState(()=>{
+      return {
+        houseList:response.data.body.list,
+        isShowList:true
+      }
+    })
+  }
+
+  // 渲染房屋列表
+  renderHouseList(){
+    return this.state.houseList.map((item,index)=>{
+      return (
+        <div className={styles.houseItems} key={index}>
+          <div className={styles.imgWrap}>
+            <img className={styles.img} 
+              src={`http://localhost:7501${item.houseImg}`} 
+              alt=""/>
+          </div>
+          <div className={styles.content}> 
+            <h3 className={styles.title}>
+              {item.title}
+            </h3>
+            <div className={styles.desc}>{item.desc}</div>
+            <div>
+              {
+                item.tags.map((tagsItem,TagsIndex)=>{
+                  const tagClass = 'tag'+(TagsIndex+1)
+                  return (
+                    <span key={TagsIndex} className={[styles.tag,styles[tagClass]].join(' ')}>
+                      {tagsItem}
+                    </span>
+                  ) 
+                })
+              } 
+            </div>
+            <div className={styles.price}>
+              <span className={styles.priceNum}>{item.price}</span>元/月
+            </div>
+          </div>
+        </div>
+      )
+    })
   }
 
   render() {
@@ -209,39 +212,20 @@ class Map extends React.Component {
       <div className="map">
         <NavHeader>地图找房</NavHeader>
         <div id="container"></div>
-        <div className="xxx">123456</div>
         {/* 房源列表 */}
         {/* className={[styles.houseList,styles.show].join('')} */}
-        {/* <div className={styles.houseList}> 
+        <div className={[styles.houseList,this.state.isShowList?'':styles.show].join('')}> 
           <div className={styles.titleWrap}>
             <h1 className={styles.listTitle}>房屋列表</h1>
-            <Link className={styles.titleMore} to="/home/list">
+            {/* <Link className={styles.titleMore} to="/home/list">
               更多房源
-            </Link>
+            </Link> */}
           </div>
           
-          <div className={styles.house}>
-            <div className={styles.imgWrap}>
-              <img className={styles.img} 
-                src="" 
-                alt=""/>
-            </div>
-            <div className={styles.content}> 
-              <h3 className={styles.title}>
-                三期xxxxxx
-              </h3>
-              <div className={styles.desc}>xx/xx/xx</div>
-              <div> 
-                <span className={[styles.tag,styles.tag1].join(' ')}>
-                  近地铁
-                </span>
-              </div>
-              <div className={styles.price}>
-                <span className={styles.priceNum}>8500</span>元/月
-              </div>
-            </div>
+          <div className={styles.house} >
+            {this.renderHouseList()}  
           </div>
-        </div> */}
+        </div>
       </div>
     );
   }

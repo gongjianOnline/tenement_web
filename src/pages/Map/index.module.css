@@ -51,13 +51,14 @@
 /*房源列表样式*/
 .houseList{
     position: fixed;
-    bottom:0;
+    top:0;
     left:0;
     width: 100%;
     height: 330px;
     transition: all 1s;
-    transform: translate3d(0,330px,0);
+    transform: translate3d(0,336px,0);
     background: #fff;
+    z-index: 10;
 }
 .show{
     transform: translate3d(0,0,0);
@@ -68,7 +69,7 @@
     background: #c0c0c2;
     border-top: 1px solid #c8c8c8;
 }
-.titleTitle{
+.listTitle{
     display: inline-block;
     padding-left: 10px;
     line-height: 43px;
@@ -91,17 +92,19 @@
 /*房屋列表*/
 .houseItems{
     padding:0 10px;
-    overflow-y: auto;
-    height: 100%;
-    padding-bottom: 45px;
+    display: flex;
 }
 .house{
-    height: 120px;
+    padding: 0 10px;
+    overflow: auto;
+    height: 280px;
     position: relative;
     box-sizing: border-box;
-    justify-content: space-around;
     padding-top: 18px;
     border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
 }
 .imaWrap{
     float: left;
