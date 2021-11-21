@@ -1,11 +1,11 @@
 /*eslint-disable */
 import React from "react";
 import { NavBar , Toast } from 'antd-mobile';
-import axios from "axios"
 import "./index.scss"
 import {getCurrentCity} from "../../utils/index"
 import { List, AutoSizer } from "react-virtualized"
 import NavHeader from "../NavHeader/index"
+import {API} from "../../utils/api.js"
 // 城市列表格式化
 const formatCityList = (data)=>{
   let CityList = {};
@@ -64,14 +64,14 @@ class CityList extends React.Component {
   } 
   // 获取城市列表数据
   async getCityList(){
-    const response = await axios({
+    const response = await API({
       methods:"get",
-      url:"http://localhost:7501/area/city?level=1"
+      url:`/area/city?level=1`
     })
     let { CityList, CityListFirst } = formatCityList(response.data.body)
-    let hotList = await axios({
+    let hotList = await API({
       methods:'get',
-      url:"http://localhost:7501/area/hot"
+      url:`/area/hot`
     })
     CityList['hot'] = [...hotList.data.body];
     CityListFirst.unshift('hot');

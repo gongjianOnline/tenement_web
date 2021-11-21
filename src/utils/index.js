@@ -1,4 +1,4 @@
-import axios from "axios";
+import {API} from "../utils/api.js"
 
 export const getCurrentCity = () => {
   const localcity = JSON.parse(localStorage.getItem('hkzf_city'));
@@ -7,9 +7,9 @@ export const getCurrentCity = () => {
       var myCity = new window.BMapGL.LocalCity();
       myCity.get((result)=>{
         let name = result.name
-        axios({
+        API({
           methods:"get",
-          url:"http://localhost:7501/area/info",
+          url:`/area/info`,
           params:{
             name:name
           }

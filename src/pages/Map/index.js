@@ -3,7 +3,7 @@ import React from "react";
 import "./index.scss";
 import NavHeader from "../NavHeader/index";
 import styles from "./index.module.css";
-import axios from "axios";
+import {API} from "../../utils/api.js"
 
 class Map extends React.Component {
   constructor(props) {
@@ -48,9 +48,9 @@ class Map extends React.Component {
   }
   // 渲染覆盖物入口
   async renderOverlays(id) {
-    const response = await axios({
+    const response = await API({
       methods: "get",
-      url: "http://localhost:7501/area/map",
+      url: `/area/map`,
       params: {
         id: id,
       },
@@ -163,9 +163,9 @@ class Map extends React.Component {
 
   // 添加覆盖物到地图中
   async getHousesList(id){
-    let response = await axios({
+    let response = await API({
       methods:'get',
-      url:"http://localhost:7501/houses",
+      url:`/houses`,
       params:{
         cityId:id
       }
@@ -186,7 +186,7 @@ class Map extends React.Component {
         <div className={styles.houseItems} key={index}>
           <div className={styles.imgWrap}>
             <img className={styles.img} 
-              src={`http://localhost:7501${item.houseImg}`} 
+              src={`${BASE_URL}${item.houseImg}`} 
               alt=""/>
           </div>
           <div className={styles.content}> 
