@@ -37,6 +37,14 @@ class Map extends React.Component {
       },
       label
     );
+    // 给地图添加移动事件
+    map.addEventListener('movestart',()=>{
+      this.setState(()=>{
+        return {
+          isShowList:false
+        }
+      })
+    })
   }
   // 渲染覆盖物入口
   async renderOverlays(id) {
