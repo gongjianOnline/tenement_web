@@ -87,35 +87,4 @@
     top: 5px;
     width: 100%;
     padding: 10px;
-    .inpurtWrapper{
-        width: 70%;
-        background: rgba(255, 255, 255, 0.808);
-        height: 30px;
-    }
-    .iconWrapper{
-        width:30px;
-        height: 30px;
-    }
-    .inpurtWrapperItem{
-        line-height: 30px;
-    }
-    .placeTitle{
-        padding: 0px 10px;
-        margin-right: 10px;
-        position: relative;
-        .placeIcon{
-            position: absolute;
-            right: -10;
-            top:50%;
-            transform: translateY(-50%);
-        }
-    }
-    .SearchInput{
-        width: 75%;
-        input{
-            width: 100%;
-            border: none;
-            background: rgba(255, 255, 255,0);
-        }
-    }
 }

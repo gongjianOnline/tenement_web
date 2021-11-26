@@ -9,6 +9,10 @@ import Nav3 from "../../assets/images/nav-3.png"
 import Nav4 from "../../assets/images/nav-4.png"
 import {API} from "../../utils/api"
 import {BASE_URL} from "../../utils/url"
+// 组件引用
+import SearchHeader from "../../compoents/SearchHeader"
+// 样式引入
+import styles from "./index.module.css"
 
 // 导航菜单数据
 const navs = [
@@ -138,10 +142,6 @@ export default class Index extends React.Component {
     })
   }
 
-  //跳转到地图页面
-  handelMap = ()=>{
-    this.props.history.push("./map")
-  }
   //获取地理位置
   async getLocale(){
     const response = await getCurrentCity()
@@ -150,10 +150,6 @@ export default class Index extends React.Component {
         localeName:response.label
       }
     })
-  }
-  //跳转到城市列表
-  handelClick = ()=>{
-    this.props.history.push('/cityList')
   }
 
   componentDidMount() {
@@ -208,25 +204,8 @@ export default class Index extends React.Component {
           </div>
         </div>
         {/* 搜索框 */}
-        <div className="SearchBox">
-            <Flex justify="around">
-              <div className="inpurtWrapper">
-                <Flex>
-                  <div className="inpurtWrapperItem placeTitle" onClick={this.handelClick}>
-                    {this.state.localeName}
-                    <Icon type="down" size="xs" className="placeIcon"/>
-                  </div>
-                  <div className="inpurtWrapperItem SearchInput">
-                    <input type="text" placeholder="请输入小区或地址"/>
-                  </div>
-                </Flex>
-              </div>
-              <div className="iconWrapper" onClick={this.handelMap}>
-                <svg className="icon iconItem" aria-hidden="true">
-                  <use xlinkHref="#icon-ditu"></use>
-                </svg>
-              </div>
-            </Flex>
+        <div className={['SearchBox',styles.iconStyle].join(" ")}>
+          <SearchHeader cityName={this.state.localeName}/>
         </div>
       </div>
     )

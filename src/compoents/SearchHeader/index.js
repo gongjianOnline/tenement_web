@@ -1,21 +1,26 @@
+/*eslint-disable */
 import React from "react"
 import {Flex,Icon} from "antd-mobile"
 import {withRouter} from "react-router-dom"
 import "./index.scss"
+import propTypes from "prop-types"
+import { defaultProps } from "antd-mobile/lib/search-bar/PropsType"
 
-const handelClick = ()=>{
-  console.log("handelClick",history)
+const handelClick = (history)=>{
+  history.push('/cityList')
 }
-const handelMap = ()=>{
-  console.log("handelMap",history)
+const handelMap = (history)=>{
+  history.push('/map')
 }
-function SearchHeader({cityName}) {
+
+
+function SearchHeader({history,cityName,className}) {
   return (
-    <div className="SearchBox">
+    <div className={['SearchBox',className||""].join(" ")}>
       <Flex justify="around">
         <div className="inpurtWrapper">
           <Flex>
-            <div className="inpurtWrapperItem placeTitle" onClick={handelClick(history)}>
+            <div className="inpurtWrapperItem placeTitle" onClick={()=>handelClick(history)}>
               {cityName}
               <Icon type="down" size="xs" className="placeIcon" />
             </div>
@@ -24,7 +29,7 @@ function SearchHeader({cityName}) {
             </div>
           </Flex>
         </div>
-        <div className="iconWrapper" onClick={handelMap(history)}>
+        <div className="iconWrapper" onClick={()=>handelMap(history)}>
           <svg className="icon iconItem" aria-hidden="true">
             <use xlinkHref="#icon-ditu"></use>
           </svg>
@@ -32,6 +37,10 @@ function SearchHeader({cityName}) {
       </Flex>
     </div>
   )
+}
+
+SearchHeader.propTypes = {
+  cityName:propTypes.string.isRequired
 }
 
 export default withRouter(SearchHeader)

@@ -4,11 +4,12 @@ import React from "react";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { TabBar } from 'antd-mobile';
+import "./index.css"
 import News from "../News"
 import Index from "../Index";
 import HouseList from "../HouseList";
 import Profile from "../Profile";
-import "./index.css"
+
 
 const tatItems = [
   {
