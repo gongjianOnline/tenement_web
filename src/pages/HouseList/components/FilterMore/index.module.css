@@ -1,0 +1,38 @@
+.wrapper{
+    position:absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+/* 区域模块布局 */
+.areaWrapper{
+    background: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.areaPickerView{
+    border: 1px solid red;
+}
+
+.handleWrapper{
+    /* align-self:flex-end; */
+    display: flex;
+    width: 100%;
+}
+.handleCancel,
+.handleConfirm{
+    padding: 12px 0px;
+    text-align: center;
+}
+.handleCancel{
+    width: 40%;
+    color: #12a575;
+}
+.handleConfirm{
+    width: 60%;
+    background: #12a575;
+    color: #fff;
+}
